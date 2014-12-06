@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import board.Board;
-import controller.Rule;
+import com.hb.board.Board;
+import com.hb.controller.Rule;
 
 public abstract class Game extends Properties {
 	// liste des joueurs

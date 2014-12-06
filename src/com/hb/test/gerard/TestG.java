@@ -2,7 +2,7 @@ package com.hb.test.gerard;
 
 
 
-import game.Game;
+import com.hb.game.Game;
 
 public class TestG {
 

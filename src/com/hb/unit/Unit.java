@@ -1,15 +1,14 @@
 package com.hb.unit;
 
-import game.Player;
-
 import java.awt.Point;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import behaviour.action.Action;
-import behaviour.move.Move;
-import board.Cell;
+import com.hb.behaviour.action.Action;
+import com.hb.behaviour.move.Move;
+import com.hb.board.Cell;
+import com.hb.game.Player;
 
 public abstract class Unit extends Properties {
 	

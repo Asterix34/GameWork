@@ -2,10 +2,10 @@ package com.hb.game;
 
 import java.awt.Point;
 
-import unit.Element;
-import behaviour.move.MoveTo;
-import board.Board;
-import board.CheckerBoard;
+import com.hb.behaviour.move.MoveTo;
+import com.hb.board.Board;
+import com.hb.board.CheckerBoard;
+import com.hb.unit.Element;
 
 public class BoardGame extends Game {
 

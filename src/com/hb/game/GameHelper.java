@@ -1,6 +1,6 @@
 package com.hb.game;
 
-import board.Board;
+import com.hb.board.Board;
 
 public abstract class GameHelper {
 	

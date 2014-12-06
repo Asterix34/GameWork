@@ -1,6 +1,6 @@
 package com.hb.test;
 
-import game.Player;
+import com.hb.game.Player;
 
 public class TestProperties {
 	

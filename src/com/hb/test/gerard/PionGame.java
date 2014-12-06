@@ -1,17 +1,15 @@
 package com.hb.test.gerard;
 
-import game.Game;
-import game.GameHelper;
-import game.Player;
-
 import java.awt.Point;
 import java.util.Scanner;
 
-import unit.Element;
-import behaviour.move.MoveTo;
-import board.Board;
-import board.Cell;
-import board.CheckerBoard;
+import com.hb.behaviour.move.MoveTo;
+import com.hb.board.Cell;
+import com.hb.board.CheckerBoard;
+import com.hb.game.Game;
+import com.hb.game.GameHelper;
+import com.hb.game.Player;
+import com.hb.unit.Element;
 
 public class PionGame extends Game{
 	

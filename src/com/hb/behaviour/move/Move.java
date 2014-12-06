@@ -2,7 +2,7 @@ package com.hb.behaviour.move;
 
 import java.awt.Point;
 
-import unit.Unit;
+import com.hb.unit.Unit;
 
 public interface Move {
 	

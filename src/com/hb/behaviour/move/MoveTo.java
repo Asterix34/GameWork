@@ -1,10 +1,9 @@
 package com.hb.behaviour.move;
 
-import game.GameHelper;
-
 import java.awt.Point;
 
-import unit.Unit;
+import com.hb.game.GameHelper;
+import com.hb.unit.Unit;
 
 public class MoveTo implements Move{
 

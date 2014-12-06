@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import unit.Unit;
+import com.hb.unit.Unit;
 
 public abstract class Cell extends Properties {
 	
