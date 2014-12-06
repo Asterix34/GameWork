@@ -11,12 +11,13 @@ public class Frame extends JFrame {
 	public Frame() {
 		super();
 		
-		this.setSize(800, 600);
+		
 		this.setTitle("Tower Defense");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setUndecorated(true);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
 		
 		Screen screen = new Screen(this);
 		
