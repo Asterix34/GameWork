@@ -65,10 +65,7 @@ public class MainPlayer extends Player {
 
 	public void drawAvatar(Screen s, Graphics g) {
 		// TODO Auto-generated method stub
-		Point pos = this.avatar.getPosition();
-		
-		g.setColor(Color.RED);
-		g.fillOval(pos.x*Screen.cellWidth+50, pos.y*Screen.cellHeight+50, Screen.cellWidth, Screen.cellHeight);
+		this.avatar.draw(s, g);
 		
 	}
 	

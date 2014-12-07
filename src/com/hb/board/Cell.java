@@ -25,8 +25,8 @@ public abstract class Cell extends Properties {
 		return units;
 	}
 	public void addUnit(Unit unit) {
+		unit.setPosition(this.point);
 		this.units.add(unit);
-		unit.setPosition(point);
 	}
 	
 	public void removeUnit(Unit unit) {

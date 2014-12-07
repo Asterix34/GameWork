@@ -6,14 +6,16 @@ import java.awt.Point;
 import java.util.Random;
 
 import com.hb.board.Cell;
+import com.hb.td.graphic.Drawable;
 import com.hb.td.graphic.Screen;
+import com.hb.td.unit.TowerUnit;
 
-public class TDCell extends Cell {
+public class TDCell extends Cell implements Drawable {
 	
-	Color color = Color.GRAY;
+	CellType type = CellType.STONE;
 
 	public void setPosition(Point p) {
-		this.point = p;
+		this.setPoint(p);
 	}
 
 	public void draw(Screen s, Graphics g) {
@@ -22,22 +24,29 @@ public class TDCell extends Cell {
 		// border
 		g.setColor(Color.DARK_GRAY);
 		g.drawRect(50+this.point.x*Screen.cellWidth, 50+this.point.y*Screen.cellHeight, Screen.cellWidth, Screen.cellHeight);
-		g.setColor(color);
+		// fill
+		g.setColor(type.color);
 		g.fillRect(51+this.point.x*Screen.cellWidth, 51+this.point.y*Screen.cellHeight, Screen.cellWidth-2, Screen.cellHeight-2);
+		// unit
+		if (getUnits().size()>0) {
+			TowerUnit unit = (TowerUnit) getUnits().get(0);
+			unit.draw(s, g);
+		}
+			
 	}
 	
-	public void setRandomColor() {
+	public void setRandomType() {
 		Random rnd = new Random();
 		int nb = rnd.nextInt(5);
 		switch (nb) {
-			case 1:
-				color = Color.BLUE;
+			case 1: // water
+				type = CellType.WATER;
 				break;
-			case 2:
-				color = Color.BLACK;
+			case 2: // wall
+				type = CellType.WALL;
 				break;
-			default:
-				color = Color.GREEN;
+			default: // grass
+				type = CellType.GRASS;
 				break;		
 		}
 	}

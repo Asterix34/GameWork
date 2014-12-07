@@ -3,6 +3,7 @@ package com.hb.td.game;
 import com.hb.game.Game;
 import com.hb.graphic.game.EnumScene;
 import com.hb.td.graphic.Frame;
+import com.hb.td.unit.TowerLightning;
 
 public class TDGame extends Game {
 	
@@ -26,6 +27,7 @@ public class TDGame extends Game {
 		player.setAvatarPosition(3,6);
 		
 		setBoard(new TDBoard());
+		
 		
 		frame = new Frame(this);
 		
