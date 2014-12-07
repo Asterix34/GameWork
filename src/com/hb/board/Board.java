@@ -27,6 +27,10 @@ public abstract class Board extends Cell {
 	public Cell getCellAt(int Line, int Column) {
 		return cells[Line][Column];
 	}
+	
+	public void setCellAt(Cell cell, int x, int y) {
+		cells[x][y] = cell;
+	}
 
 	public Cell[][] getCells() {
 		return cells;

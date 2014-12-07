@@ -5,32 +5,38 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import com.hb.game.EnumScene;
-import com.hb.td.MainPlayer;
+import com.hb.graphic.game.Direction;
+import com.hb.td.game.MainPlayer;
+import com.hb.td.game.TDBoard;
+import com.hb.td.game.TDGame;
 import com.hb.td.input.KeyHandler;
 
 public class Screen extends JPanel implements Runnable {
 	// create a new thread to run the screen (which is runnable)
 	Thread thread = new Thread(this);
 	Frame frame;
+	TDGame game;
 	MainPlayer player;
-	static final int nbColumns = 25;
-	static final int nbRows = 15;
-	static final int cellWidth = 50;
-	static final int cellHeight = 50;
+	public static final int cellWidth = 40;
+	public static final int cellHeight = 40;
 	
 	private int fps = 0;	
-	public boolean running = false;
-	public EnumScene scene = EnumScene.HOME;
 	
-	
-	public Screen(Frame frame) {
+	public Screen(Frame frame, TDGame game) {
 		this.frame = frame;
+		this.game = game;
+		this.player = game.getMainPlayer();
 		
 		this.frame.addKeyListener(new KeyHandler(this));
 		
+		this.player.setScreen(this);
+		
 		// start thread (launch run);
 		thread.start();
+	}
+	
+	public TDGame getGame() {
+		return game;
 	}
 	
 	@Override
@@ -38,7 +44,7 @@ public class Screen extends JPanel implements Runnable {
 		g.clearRect(0, 0, this.frame.getWidth(), this.frame.getHeight());
 
 		
-		switch (scene) {
+		switch (game.scene) {
 			case HOME:
 				g.setColor(Color.BLUE);
 				g.fillRect(0,0, this.frame.getWidth(), this.frame.getHeight());
@@ -48,16 +54,25 @@ public class Screen extends JPanel implements Runnable {
 				g.setColor(Color.GREEN);
 				g.fillRect(0,0, this.frame.getWidth(), this.frame.getHeight());
 				
-				// grid
-				g.setColor(Color.DARK_GRAY);
-				for (int x=0; x < nbColumns; x++) {
-					for (int y=0; y < nbRows; y++) {
-						g.drawRect(50+x*cellWidth, 50+y*cellHeight, 50, 50);
-					}
-				}
+				// draw board
+				((TDBoard) game.getBoard()).draw(this, g);
+
 				
 				//health and money
-				g.drawRect(50, nbRows*cellHeight + 100, 150, 80);
+				player.drawHud(this, g);
+				
+				// avatar
+				player.drawAvatar(this, g);
+				/*
+				g.setColor(Color.DARK_GRAY);
+				// main box
+				g.drawRect(50, nbRows*cellHeight + 100, 150, 75);
+				// icon
+				g.drawRect(55, nbRows*cellHeight + 105, 45, 45);
+				// top row
+				g.drawRect(105, nbRows*cellHeight + 105, 90, 30);
+				// bottom row
+				g.drawRect(105, nbRows*cellHeight + 140, 90, 30);*/
 				
 				break;
 			default:
@@ -75,29 +90,15 @@ public class Screen extends JPanel implements Runnable {
 
 	}; 
 	
-	public void init() {
-		player = new MainPlayer(this, "Michel");
-
-		running = true;
-		scene = EnumScene.HOME;
-		
-	}
-	
-	public void start() {
-		player.createSprite();
-		
-		scene = EnumScene.GAME;
-	}
-
 	@Override
 	public void run() {
+		System.out.println("[Screen] run...");
 		
 		long lastFrameTime = System.currentTimeMillis();
 		int nbFrames = 0;
 
-		init();
 		// loop on the game
-		while(running) {
+		while(game.running) {
 			repaint();
 			
 			nbFrames++;
@@ -114,27 +115,46 @@ public class Screen extends JPanel implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+
 		}
+		
+
 		
 		System.exit(0);
 		
 
 	}
 	
-	private void stop() {
+	/*private void stop() {
 		// TODO Auto-generated method stub
 		running = false;
-	}
+	}*/
 	
 	public class KeyTyped {
 		public void keyESC() {
 			// TODO Auto-generated method stub
-			stop();
+			game.stop();
 		}
 
 		public void keySPACE() {
 			// TODO Auto-generated method stub
-			start();
+			game.startTD();
+		}
+		
+		public void keyUP() {
+			player.go(Direction.UP);
+		}
+		
+		public void keyDOWN() {
+			player.go(Direction.DOWN);
+		}
+		
+		public void keyLEFT() {
+			player.go(Direction.LEFT);
+		}
+		
+		public void keyRIGHT() {
+			player.go(Direction.RIGHT);
 		}
 
 

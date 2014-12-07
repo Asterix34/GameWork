@@ -2,24 +2,26 @@ package com.hb.td.graphic;
 
 import javax.swing.JFrame;
 
-public class Frame extends JFrame {
+import com.hb.game.Game;
+import com.hb.td.game.TDGame;
 
-	public static void main(String[] args) {
-		new Frame();
-	}
+public class Frame extends JFrame {
 	
-	public Frame() {
+	//TDGame game;
+
+	public Frame(TDGame game) {
 		super();
 		
+		//this.game = game;
 		
-		this.setTitle("Tower Defense");
+		this.setTitle(game.name);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setUndecorated(true);
 		this.setResizable(false);
 		this.setVisible(true);
 		
-		Screen screen = new Screen(this);
+		Screen screen = new Screen(this, game);
 		
 		this.add(screen);
 	}

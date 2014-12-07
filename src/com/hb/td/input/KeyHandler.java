@@ -28,13 +28,28 @@ public class KeyHandler implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// every time a key is pressed
-		int keyCode = e.getKeyCode();
-		System.out.println(keyCode);
-		if (keyCode == e.VK_ESCAPE) {
-			this.keyTyped.keyESC();
-		}
-		if (keyCode == e.VK_SPACE) {
+		System.out.println( e.getKeyCode());
+	
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			this.keyTyped.keyUP();
+			break;
+		case KeyEvent.VK_DOWN:
+			this.keyTyped.keyDOWN();
+			break;
+		case KeyEvent.VK_LEFT:
+			this.keyTyped.keyLEFT();
+			break;
+		case KeyEvent.VK_RIGHT:
+			this.keyTyped.keyRIGHT();
+			break;
+		case KeyEvent.VK_SPACE:
 			this.keyTyped.keySPACE();
+			break;
+		case KeyEvent.VK_ESCAPE:
+			this.keyTyped.keyESC();
+			break;
+		default:		
 		}
 			
 	}
@@ -42,6 +57,7 @@ public class KeyHandler implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+
 		
 	}
 	
