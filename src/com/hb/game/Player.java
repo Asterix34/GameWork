@@ -1,12 +1,26 @@
 package com.hb.game;
 
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Player extends Properties {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Player {
 	
 	int id;
-	static int nextId = 1;
 	String name;
+	Map<String, Object> properties = new HashMap<String, Object>();
+
+	static int nextId = 1;
+
+	
+	public Player() {
+		new Player("tempName");
+	}
 	
 	public Player(String name) {
 		this.id = nextId;
@@ -23,7 +37,7 @@ public class Player extends Properties {
 	
 	/* @Deprecated Use getProperty("name") instead */
 	public String getName() {
-		return this.getProperty("name");
+		return (String) this.getProperty("name");
 	}
 	
 	/* @Deprecated Use setProperty("score") instead */
@@ -32,16 +46,24 @@ public class Player extends Properties {
 	}
 	
 	public void addScore(int s) {
-		int score = Integer.valueOf(this.getProperty("score")) + s;
+		int score = (int) this.getProperty("score") + s;
 		this.setProperty("score", String.valueOf(score));
 	}
 	
 	/* @Deprecated Use getProperty("name") instead */
 	public int getScore() {
-		return Integer.valueOf(this.getProperty("score"));
+		return (int) this.getProperty("score");
 	}
 	
 	public int getId() {
 		return this.id;
+	}
+	
+	public void setProperty(String key, Object value) {
+		this.properties.put(key, value);
+	}
+	
+	public Object getProperty(String key) {
+		return this.properties.get(key);
 	}
 }

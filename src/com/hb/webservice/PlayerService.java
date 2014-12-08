@@ -9,6 +9,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Result;
@@ -34,7 +35,8 @@ public class PlayerService {
 	private void initPlayers() throws Exception {
 		JAXBContext context = JAXBContext.newInstance(PlayerList.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		unmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		//unmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
 		
 		players = (PlayerList) unmarshaller.unmarshal(new File("players.xml"));
 	}
@@ -42,7 +44,7 @@ public class PlayerService {
 	private void savePlayers() throws Exception {
 		JAXBContext context = JAXBContext.newInstance(PlayerList.class);
 		Marshaller marshaller = context.createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		//marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		
 		marshaller.marshal(players, new File("players.xml"));
 	}
@@ -63,10 +65,10 @@ public class PlayerService {
 	}
 	
 	
-	@WebMethod
+	/*@WebMethod
 	public boolean testWS() {
 		return true;
-	}
+	}*/
 	
 	@WebMethod
 	public Player getPlayer(int id) {
@@ -76,15 +78,17 @@ public class PlayerService {
 	@WebMethod
 	public void putPlayer(Player player) {
 		players.putPlayer(player);
+		try {
+			savePlayers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println("Erreur saving players to XML : ["+e.getMessage()+"]");
+		}
 	}
 	
 	@WebMethod
-	public Map<Integer, Player> getPlayers() {
-		return players.getPlayers();
+	public PlayerList getPlayerList() {
+		return players;
 	}
-	
-	/*public List<Player> getPlayers() {
-		
-	}*/
 
 }

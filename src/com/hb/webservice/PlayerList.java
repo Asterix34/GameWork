@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.hb.game.Player;
 
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PlayerList {
 	
 	protected Map<Integer, Player> players = new HashMap<Integer, Player>();
@@ -25,7 +26,6 @@ public class PlayerList {
 		this.players = players;
 	}
 	
-	@XmlElement(name="Item")
 	public Map<Integer, Player> getPlayers() {
 		return players;
 	}

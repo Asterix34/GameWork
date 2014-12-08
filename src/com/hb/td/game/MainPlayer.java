@@ -51,7 +51,7 @@ public class MainPlayer extends Player {
 		g.drawRect(hudX+5, hudY+5, 45, 45);
 		// name
 		g.drawRect(hudX+5, hudY+55, 45, 15);
-		g.drawString(getProperty("name"), 60, hudY+67);
+		g.drawString((String) getProperty("name"), 60, hudY+67);
 		// top row
 		g.drawRect(hudX+55, hudY+5, 90, 30);
 		g.drawString("Gold : "+getProperty("gold"), 110, hudY+17);
