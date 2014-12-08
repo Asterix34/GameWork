@@ -4,7 +4,19 @@ import java.util.Properties;
 
 public class Player extends Properties {
 	
+	int id;
+	static int nextId = 1;
+	String name;
+	
 	public Player(String name) {
+		this.id = nextId;
+		this.setProperty("name", name);
+		this.setProperty("score", "0");
+		nextId++;
+	}
+	
+	public Player(int id, String name) {
+		this.id = id;
 		this.setProperty("name", name);
 		this.setProperty("score", "0");
 	}
@@ -27,5 +39,9 @@ public class Player extends Properties {
 	/* @Deprecated Use getProperty("name") instead */
 	public int getScore() {
 		return Integer.valueOf(this.getProperty("score"));
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 }
